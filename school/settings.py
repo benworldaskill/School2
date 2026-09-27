@@ -59,7 +59,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'  # newly added
+    'whitenoise.middleware.WhiteNoiseMiddleware'  ,# newly added
     'django.contrib.sessions.middleware.SessionMiddleware',
    
     'django.middleware.common.CommonMiddleware',
@@ -132,8 +132,10 @@ USE_TZ = True
 
 
 # Static files (CSS, JavaScript, Images)
-STATIC_URL = 'home/static/'
-STATICFILES_DIRS = [BASE_DIR / "home/static"]
+STATIC_URL = 'static/'
+STATIC_ROOT = BASE_DIR / 'staticfiles'
+STATICFILES_DIRS = [BASE_DIR / 'home/static']
+
 #STATIC_ROOT = BASE_DIR / "staticfiles"
 #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifeststaticFilesStorage"
 
@@ -146,4 +148,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'img')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-ALLOWED_HOSTS = ['*', '.railway.app' "localhost", "127.0.0.1"]  # Newly added
+ALLOWED_HOSTS = ['*', '.railway.app', 'localhost', '127.0.0.1']  # Newly added
