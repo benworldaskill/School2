@@ -59,8 +59,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware'  # newly added
     'django.contrib.sessions.middleware.SessionMiddleware',
-   # 'whitenoise.middleware.WhiteNoiseMiddleware'  # newly added
+   
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -145,4 +146,4 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'img')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-#ALLOWED_HOSTS = [".herokuapp.com", "localhost", "127.0.0.1"]  # Newly added
+ALLOWED_HOSTS = ['*', '.railway.app' "localhost", "127.0.0.1"]  # Newly added
