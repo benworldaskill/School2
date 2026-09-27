@@ -1,0 +1,137 @@
+{% extends 'base.html' %}
+{% load static%}
+
+
+
+
+{% block content %}
+
+<section class="reveal">
+
+    <article id="hero">
+
+        <div class="column">
+            <div class="text-center">
+
+                <h1>Admissions</h1>
+
+            </div>
+        </div>
+
+
+
+    </article>
+
+
+</section>
+
+
+<section class="reveal">
+    <article>
+        <div class="column">
+            <div class="content">
+                <h1 class="text-center">Curriculum</h1>
+                <p class="text-center">We use National Curriculum for Nigerian Education</p>
+                <p class="text-primary text-center">Gaga school follows an organized admission process with the
+                    following steps:</p>
+            </div>
+
+        </div>
+
+        <div class="row g-4">
+
+
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card blue">
+
+
+                    <h3>STEP 1: </h3>
+
+                    <p>
+                        Application: Forms are obtainable at the school or online on the school's website.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card blue">
+
+
+                    <h3>STEP 2: </h3>
+
+                    <p>
+                        Assessment: Applicant's take the assessment test at their with prior notification and booking
+                        with the admissions office.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card blue">
+
+
+                    <h3>STEP 3: </h3>
+
+                    <p>
+                        Interview: Applicants and their parents are interviewed by the Head of schools or Director to
+                        better understand the student's educational goals.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card blue">
+
+
+                    <h3>STEP 4: </h3>
+
+                    <p>
+                        Provisional Admission: Successful applicants are offered provisional admission until payment of
+                        the required fees.
+                    </p>
+                </div>
+            </div>
+
+            <div class="col-lg-4 col-md-6">
+                <div class="feature-card blue">
+
+
+                    <h3>STEP 5: </h3>
+
+                    <p>
+                        Admission: In order to guarantee a place at Gaga School, all fees must be paid by the date
+                        indicated on the provisional admission letter.
+                    </p>
+                </div>
+            </div>
+
+        </div>
+        <div class="row text-center text-primary">
+            <p>Note: Parents are advised on timely payment.</p>
+
+        </div>
+
+    </article>
+</section>
+
+
+
+
+
+
+
+<section class="reveal">
+    <div>
+
+    </div>
+    <Span class="align-baseline">
+        <h2>Ready to take the next step?</h2>
+    </Span>
+
+    <span class="align-baseline"> <a class="text-primary fs-1 fw-bold" href="{% url 'applying' %}" class="fs-1">Apply
+            Now</a>
+    </span>
+
+</section>
+
+{% endblock %}

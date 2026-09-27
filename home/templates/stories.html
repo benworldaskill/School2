@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+
+<h1 class="text-center">Stories</h1>
+
+
+<section id="family-story" class="reveal">
+
+
+
+    <div class="row g-4">
+        {% for story in stories reversed %}
+
+        <div class="story-wrapper">
+
+            <div class="story-image">
+
+                <img src="{{story.img.url}}" alt="">
+
+                <div class="story-overlay">
+                    {{story.title}}
+                </div>
+
+            </div>
+
+            <div class="story-content">
+
+                <div class="quote-mark">❝</div>
+
+                <h3>
+
+                    {{ story.description}}
+
+                </h3>
+
+                <div class="author">
+
+                    <h5>{{story.parent_name}}</h5>
+
+                    <span>Parent</span>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+
+    </div>
+
+
+
+
+
+
+</section>
+
+
+{% endblock %}

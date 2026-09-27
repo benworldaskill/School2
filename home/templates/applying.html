@@ -1,0 +1,336 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block content%}
+
+<section id="enquiry" class="reveal">
+
+    <div class="container">
+
+
+
+        <div class="section-heading">
+
+            <span class="badge bg-light text-primary">
+                Application Form
+            </span>
+
+            <h2>Steps to Enrolling you kids</h2>
+
+            <p>
+                Submit your Application and our admissions team
+                will contact you shortly.
+            </p>
+
+        </div>
+
+        <div class="enquiry-card">
+
+            <form name="applying" method="POST">
+
+                {% csrf_token %}
+
+                <div class="form-section">
+
+                    <h2>BIO DATA</h2>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <p>Student First Name:*</p>
+                            {{ forms.student_name }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Student Last Name:</p>
+                            {{ forms.student_lastname }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Student's Email Address:</p>
+                            {{ forms.student_email }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Date Of Birth:</p>
+                            {{ forms.date_of_birth }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Place Of Birth:</p>
+                            {{ forms.place_of_birth }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Language Spoken at Home:</p>
+                            {{ forms.language_spoken_at_home }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Nationality (if multiple, enter and sperate by comma):</p>
+                            {{ forms.nationality }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>State Of Origin:</p>
+                            {{ forms.state_of_origin }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Gender:</p>
+                            {{ forms.gender }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Height:</p>
+                            {{ forms.height }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Weight:</p>
+                            {{ forms.weight }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Family Size:</p>
+                            {{ forms.family_size }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Name Of Last School Attended:</p>
+                            {{ forms.name_of_last_school}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Last School Start Date:</p>
+                            {{ forms.last_school_startdate}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Last School End Date:</p>
+                            {{ forms.last_school_enddate}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Grade / Year In School Attended:</p>
+                            {{ forms.position_in_last_school}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Reason For Leaving The School:</p>
+                            {{ forms.reason_for_leaving}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Class To Which Admission Is Sought:</p>
+                            {{ forms.class_expexting_admission}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Would the Student need Transport Service:</p>
+                            {{ forms.transport_service}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Any Certificate? (Enter Name and Type):</p>
+                            {{ forms.any_certificate}}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-section">
+
+                    <h2>MEDICAL REPORT</h2>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <p>Vision:</p>
+                            {{ forms.vision }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Hearing:</p>
+                            {{ forms.hearing }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Speech:</p>
+                            {{ forms.speech }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>General Vitality:</p>
+                            {{ forms.general_vitality }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Disability:</p>
+                            {{ forms.disability }}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+
+                <div class="form-section">
+
+                    <h2>PARENT'S DATA (FATHER)</h2>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <p>Father's Title:</p>
+                            {{ forms.father_title }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Father's Name:</p>
+                            {{ forms.father_name }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Occupation/Profession:</p>
+                            {{ forms.occupation }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Office Address:</p>
+                            {{ forms.office_address}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Home Address:</p>
+                            {{ forms.home_address }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Phone Number:</p>
+                            {{ forms.father_phone}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Email Address:</p>
+                            {{ forms.father_email}}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-section">
+
+                    <h2>PARENT'S DATA (Mother)</h2>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <p>Mother's Title:</p>
+                            {{ forms.mother_title }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Mother's Name:</p>
+                            {{ forms.mother_name }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Occupation/Profession:</p>
+                            {{ forms.mo_occupation }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Office Address:</p>
+                            {{ forms.mo_office_address}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Home Address:</p>
+                            {{ forms.mo_home_address }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Phone Number:</p>
+                            {{ forms.mother_phone}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Email Address:</p>
+                            {{ forms.mother_email}}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="form-section">
+
+                    <h2>GUARDIAN'S DATA</h2>
+
+                    <div class="row">
+
+                        <div class="col-md-6 mb-3">
+                            <p>Guardian's Title:</p>
+                            {{ forms.gd_title }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Guardian's Name:</p>
+                            {{ forms.gd_name }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Occupation/Profession:</p>
+                            {{ forms.gd_occupation }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Office Address:</p>
+                            {{ forms.gd_office_address}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Home Address:</p>
+                            {{ forms.gd_home_address }}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Phone Number:</p>
+                            {{ forms.gd_phone}}
+                        </div>
+
+                        <div class="col-md-6 mb-3">
+                            <p>Email Address:</p>
+                            {{ forms.gd_email}}
+                        </div>
+
+                    </div>
+
+                </div>
+
+
+                <div class="text-center">
+
+                    <button type="submit" class="submit-btn">
+                        Submit Application
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</section>
+
+
+{% endblock %}
