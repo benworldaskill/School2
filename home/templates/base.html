@@ -44,7 +44,18 @@
 
 <body>
 
+
     {% include 'partial/_header.html' %}
+    {% if messages %}
+    <div id="django-messages-container">
+        {% for message in messages %}
+        <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %} project-toast-alert">
+            {{ message }}
+        </div>
+        {% endfor %}
+    </div>
+    {% endif %}
+
 
     <main>{% block content%} {% endblock%}</main>
 
@@ -98,7 +109,7 @@
                 </div>
 
 
-             
+
                 <div class="col-lg-2 col-md-6 col-6 footer-column">
                     <h5>Legal</h5>
 
@@ -112,7 +123,7 @@
             </div>
 
 
-            
+
             <div class="footer-bottom">
                 <p>© 2026 Gaga. All rights reserved.</p>
             </div>
@@ -172,6 +183,23 @@
         });
 
     </script>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const messagesContainer = document.getElementById("django-messages-container");
+            if (messagesContainer) {
+                setTimeout(function () {
+                    messagesContainer.style.transition = "opacity 0.5s ease";
+                    messagesContainer.style.opacity = "0";
+                    setTimeout(function () {
+                        messagesContainer.remove();
+                    }, 500);
+                }, 3000); // 3 seconds
+            }
+        });
+    </script>
+
 
 </body>
 
