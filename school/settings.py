@@ -138,9 +138,17 @@ STATICFILES_DIRS = [BASE_DIR / 'home/static']
 
 #STATIC_ROOT = BASE_DIR / "staticfiles"
 #STATICFILES_STORAGE = "whitenoise.storage.CompressedManifeststaticFilesStorage"
+STORAGES = {
+    "default": {
+        "BACKEND": "django.core.files.storage.FileSystemStorage",
+    },
+    "staticfiles": {
+        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+    },
+}
 
 MEDIA_URL = 'img/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'img')
+MEDIA_ROOT =    BASE_DIR/ 'img'  #os.path.join(BASE_DIR, 'img')
 
 
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
