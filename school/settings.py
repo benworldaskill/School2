@@ -48,7 +48,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
-   # 'whitenoise.runserver_nostatic',
+    # 'whitenoise.runserver_nostatic',
     'django.contrib.staticfiles',
     'home',
 
@@ -59,9 +59,9 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
-    'whitenoise.middleware.WhiteNoiseMiddleware'  ,# newly added
+    'whitenoise.middleware.WhiteNoiseMiddleware',  # newly added
     'django.contrib.sessions.middleware.SessionMiddleware',
-   
+
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
@@ -136,19 +136,22 @@ STATIC_URL = 'static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 STATICFILES_DIRS = [BASE_DIR / 'home/static']
 
-#STATIC_ROOT = BASE_DIR / "staticfiles"
-#STATICFILES_STORAGE = "whitenoise.storage.CompressedManifeststaticFilesStorage"
+# STATIC_ROOT = BASE_DIR / "staticfiles"
+# STATICFILES_STORAGE = "whitenoise.storage.CompressedManifeststaticFilesStorage"
+# Change "staticfiles" backend to use CompressedStaticFilesStorage
 STORAGES = {
     "default": {
         "BACKEND": "django.core.files.storage.FileSystemStorage",
     },
     "staticfiles": {
-        "BACKEND": "whitenoise.storage.CompressedManifestStaticFilesStorage",
+        # This backend allows your app to build successfully even if a CSS file references a missing image or font
+        "BACKEND": "whitenoise.storage.CompressedStaticFilesStorage",
     },
 }
 
+
 MEDIA_URL = 'img/'
-MEDIA_ROOT =    BASE_DIR/ 'img'  #os.path.join(BASE_DIR, 'img')
+MEDIA_ROOT = BASE_DIR / 'img'  # os.path.join(BASE_DIR, 'img')
 
 
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
@@ -157,4 +160,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
 ALLOWED_HOSTS = ['*', '.railway.app', 'localhost', '127.0.0.1']  # Newly added
-CSRF_TRUSTED_ORIGINS = ['https://web-production-97443f.up.railway.app'] # newly added 
+CSRF_TRUSTED_ORIGINS = [
+    'https://web-production-97443f.up.railway.app']  # newly added
+WHITENOISE_KEEP_ONLY_HASHED_FILES = True  # newly added
