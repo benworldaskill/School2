@@ -150,7 +150,7 @@ STORAGES = {
 }
 
 
-MEDIA_URL = 'img/'
+MEDIA_URL = '/img/'
 MEDIA_ROOT = BASE_DIR / 'img'  # os.path.join(BASE_DIR, 'img')
 
 
