@@ -17,7 +17,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from django.conf.urls.static import static
-from django.views.static import serve # Newly added
+from django.views.static import serve  # Newly added
+from django.urls import path as url_path  # newly added
 from django.conf import settings
 
 urlpatterns = [
@@ -26,5 +27,5 @@ urlpatterns = [
 ]
 
 urlpatterns += [
-    re_path(r'^img/(?P<path>.*)$', serve, {'document_root': settings.MEDIA_ROOT}),
+    path('img/<path:path>', serve, {'document_root': settings.MEDIA_ROOT}),
 ]
