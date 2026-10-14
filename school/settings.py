@@ -24,7 +24,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-558o05adjc+c86^7mo%npkk_xz&ul0!b$-g$3xlwh-@($puua4'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
 ALLOWED_HOSTS = []
 
@@ -161,5 +161,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ALLOWED_HOSTS = ['*', '.railway.app', 'localhost', '127.0.0.1']  # Newly added
 CSRF_TRUSTED_ORIGINS = [
-    'https://web-production-97443f.up.railway.app']  # newly added
+    'https://web-production-97443f.up.railway.app',
+    'https://web-production-83aac.up.railway.app'
+]  # newly added
 WHITENOISE_KEEP_ONLY_HASHED_FILES = True  # newly added

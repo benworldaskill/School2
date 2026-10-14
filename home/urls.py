@@ -15,4 +15,5 @@ urlpatterns = [
     path('gallery', views.gallery, name='gallery'),
     path('coming', views.coming, name='coming'),
     path('about', views.about_us, name='about'),
+    path('pastquestion', views.practice_question, name='pastquestion')
 ]

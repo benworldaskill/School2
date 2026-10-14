@@ -1,0 +1,621 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
+
+<style>
+    /* ---------- mobile first ---------- */
+    .pq {
+        max-width: 460px;
+        margin: 16px auto;
+        padding: 20px;
+        min-height: 620px;
+        border-radius: 28px;
+        color: #1b2430;
+        font-family: 'Poppins', system-ui, sans-serif;
+        background: #fff;
+        border: 1px solid #e3e8f0;
+        box-shadow: 0 8px 30px rgba(20, 40, 80, .08);
+        display: flex;
+        flex-direction: column;
+        box-sizing: border-box
+    }
+
+    .pq * {
+        box-sizing: border-box;
+        font-family: inherit
+    }
+
+    .pq h1 {
+        font-size: 24px;
+        font-weight: 600;
+        margin: 0 0 20px;
+        color: #1b2430
+    }
+
+    .pq .muted {
+        color: #6b7685;
+        font-size: 14px;
+        margin: 0 0 4px
+    }
+
+    .pq-alert {
+        padding: 12px 14px;
+        border-radius: 16px;
+        font-size: 13px;
+        margin-bottom: 14px;
+        background: #eef3ff;
+        color: #2b3a55;
+        word-break: break-word
+    }
+
+    .pq-alert.err {
+        background: #fdecee;
+        border: 1px solid #f1aeb5;
+        color: #842029
+    }
+
+    .pq-controls {
+        display: grid;
+        gap: 14px;
+        margin-bottom: 14px
+    }
+
+    .pq-tabs {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 4px;
+        padding: 4px;
+        border-radius: 18px;
+        background: #eef2f8
+    }
+
+    .pq-tab {
+        border: 0;
+        background: transparent;
+        color: #5b6675;
+        padding: 12px 4px;
+        border-radius: 14px;
+        font-size: 13px;
+        cursor: pointer
+    }
+
+    .pq-tab:hover:not(.active) {
+        background: #e2e8f2
+    }
+
+    .pq-tab.active {
+        background: #0d6efd;
+        color: #fff;
+        font-weight: 600
+    }
+
+    .pq-year {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        background: #eef2f8;
+        border-radius: 18px;
+        padding: 12px 16px;
+        font-size: 14px;
+        color: #5b6675
+    }
+
+    .pq-year select {
+        background: transparent;
+        color: #1b2430;
+        border: 0;
+        font-size: 14px;
+        font-weight: 600;
+        outline: none;
+        cursor: pointer
+    }
+
+    .pq-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px
+    }
+
+    .pq-sub {
+        height: 120px;
+        border: 1px solid #dbe6ff;
+        border-radius: 24px;
+        background: #eef3ff;
+        color: #1b2430;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 12px;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        transition: background .15s, border-color .15s
+    }
+
+    .pq-sub:hover {
+        background: #e0eaff;
+        border-color: #b8cffd
+    }
+
+    .pq-sub .g {
+        font-size: 30px;
+        font-weight: 300;
+        color: #0d6efd;
+        opacity: .75;
+        line-height: 1
+    }
+
+    .pq-top {
+        display: flex;
+        justify-content: space-between;
+        font-size: 14px;
+        margin-bottom: 12px
+    }
+
+    .pq-top a {
+        color: #0d6efd;
+        text-decoration: none
+    }
+
+    .pq-bar {
+        height: 4px;
+        border-radius: 4px;
+        background: #e3e8f0;
+        margin-bottom: 24px;
+        overflow: hidden
+    }
+
+    .pq-bar div {
+        height: 100%;
+        width: 0;
+        background: #0d6efd;
+        transition: width .3s
+    }
+
+    .pq-quiz {
+        display: flex;
+        flex-direction: column;
+        flex: 1
+    }
+
+    .pq-right {
+        display: flex;
+        flex-direction: column;
+        flex: 1
+    }
+
+    .pq-q {
+        text-align: center;
+        font-size: 15px;
+        line-height: 1.6;
+        margin-bottom: 16px
+    }
+
+    .pq-q img {
+        max-width: 100%;
+        max-height: 220px;
+        border-radius: 12px;
+        margin-top: 10px
+    }
+
+    .pq-passage {
+        display: none;
+        max-height: 220px;
+        overflow: auto;
+        padding: 14px;
+        margin-bottom: 16px;
+        border-radius: 16px;
+        background: #f5f7fb;
+        border: 1px solid #e3e8f0;
+        font-size: 13px;
+        line-height: 1.6;
+        color: #3b4553
+    }
+
+    .pq-opts {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+        margin-bottom: 20px
+    }
+
+    .pq-opt {
+        width: 100%;
+        padding: 16px;
+        border-radius: 18px;
+        border: 1px solid #d5dce8;
+        background: #fff;
+        color: #1b2430;
+        font-size: 15px;
+        font-weight: 500;
+        text-align: center;
+        cursor: pointer;
+        transition: background .15s, border-color .15s
+    }
+
+    .pq-opt:hover:not(:disabled) {
+        background: #f3f7ff;
+        border-color: #0d6efd
+    }
+
+    .pq-opt.correct {
+        background: #e8f5ee;
+        border-color: #198754;
+        color: #0f5132
+    }
+
+    .pq-opt.wrong {
+        background: #fdecee;
+        border-color: #dc3545;
+        color: #842029
+    }
+
+    .pq-opt.dim {
+        opacity: .5
+    }
+
+    .pq-sol {
+        display: none;
+        margin-bottom: 20px
+    }
+
+    .pq-sol h2 {
+        font-size: 18px;
+        font-weight: 600;
+        margin: 10px 0 6px;
+        color: #1b2430
+    }
+
+    .pq-sol .txt {
+        font-size: 14px;
+        line-height: 1.6;
+        color: #3b4553
+    }
+
+    .pq-sol ol {
+        display: none;
+        margin: 10px 0 0;
+        padding-left: 20px;
+        font-size: 14px;
+        color: #3b4553
+    }
+
+    .pq-verdict {
+        font-size: 14px;
+        font-weight: 600;
+        margin: 0 0 4px
+    }
+
+    .pq-verdict.ok {
+        color: #198754
+    }
+
+    .pq-verdict.no {
+        color: #dc3545
+    }
+
+    .pq-actions {
+        margin-top: auto;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 12px
+    }
+
+    .pq-btn {
+        padding: 14px;
+        border-radius: 999px;
+        font-size: 14px;
+        font-weight: 600;
+        cursor: pointer;
+        border: 1px solid #c5cedb;
+        background: #fff;
+        color: #1b2430;
+        text-align: center;
+        text-decoration: none
+    }
+
+    .pq-btn:hover:not(:disabled) {
+        background: #f3f7ff
+    }
+
+    .pq-btn.yellow {
+        background: #0d6efd;
+        border-color: #0d6efd;
+        color: #fff
+    }
+
+    .pq-btn.yellow:hover {
+        background: #0b5ed7
+    }
+
+    .pq-btn:disabled {
+        opacity: .4;
+        cursor: default
+    }
+
+    .pq-result {
+        display: none;
+        flex: 1;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        gap: 8px
+    }
+
+    .pq-result .big {
+        font-size: 60px;
+        font-weight: 600;
+        color: #0d6efd
+    }
+
+    /* ---------- desktop ---------- */
+    @media (min-width:900px) {
+        .pq {
+            max-width: 2000px;
+            margin: 32px auto;
+            padding: 40px 48px;
+            min-height: 560px
+        }
+
+        .pq h1 {
+            font-size: 32px;
+            margin-bottom: 28px
+        }
+
+        .pq-controls {
+            grid-template-columns: minmax(0, 520px) 240px;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 24px
+        }
+
+        .pq-tab {
+            padding: 14px 8px;
+            font-size: 14px
+        }
+
+        .pq-grid {
+            grid-template-columns: repeat(4, 1fr);
+            gap: 16px
+        }
+
+        .pq-sub {
+            height: 150px;
+            font-size: 15px
+        }
+
+        .pq-sub .g {
+            font-size: 36px
+        }
+
+        .pq-quiz {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            column-gap: 56px;
+            align-content: start
+        }
+
+        .pq-left {
+            min-width: 0
+        }
+
+        .pq-q {
+            text-align: left;
+            font-size: 19px;
+            line-height: 1.7
+        }
+
+        .pq-passage {
+            font-size: 14px;
+            max-height: 340px
+        }
+
+        .pq-opt {
+            font-size: 16px;
+            padding: 18px
+        }
+
+        .pq-actions {
+            padding-top: 12px
+        }
+    }
+</style>
+
+<div class="pq">
+
+    {% if error %}
+    <div class="pq-alert err">{{ error }}</div>
+    {% endif %}
+
+    {% if mode == 'select' %}
+    <p class="muted">Welcome Student</p>
+    <h1>Practice past questions</h1>
+
+    {% if subject_requested and not error %}
+    <div class="pq-alert">No questions found for {{ exam_short }} {{ subject_name }} {{ year }}. Try another year or
+        exam.</div>
+    {% endif %}
+
+    <form method="GET" action="">
+        <input type="hidden" name="exam" id="examInput" value="{{ selected_exam }}">
+
+        <div class="pq-controls">
+            <div class="pq-tabs">
+                {% for exam in exams %}
+                <button type="button" class="pq-tab" data-value="{{ exam.slug }}">{{ exam.short }}</button>
+                {% endfor %}
+            </div>
+
+            <div class="pq-year">
+                <label for="year">Year</label>
+                <select id="year" name="year">
+                    {% for y in years %}
+                    <option>{{ y.value }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+        </div>
+
+        <div class="pq-grid">
+            {% for sub in subjects %}
+            <button type="submit" name="subject" value="{{ sub.slug }}" class="pq-sub">
+                <span>{{ sub.name }}</span>
+                <span class="g">{{ sub.glyph }}</span>
+            </button>
+            {% endfor %}
+        </div>
+    </form>
+
+    <script>
+        (function () {
+            var input = document.getElementById('examInput');
+            var tabs = document.querySelectorAll('.pq-tab');
+            function sync() {
+                tabs.forEach(function (t) { t.classList.toggle('active', t.dataset.value === input.value); });
+            }
+            tabs.forEach(function (t) {
+                t.addEventListener('click', function () { input.value = t.dataset.value; sync(); });
+            });
+            document.getElementById('year').value = "{{ year }}";
+            sync();
+        })();
+    </script>
+
+    {% else %}
+
+    <div class="pq-top">
+        <a href="?">&larr; Subjects</a>
+        <span class="muted">{{ exam_short }} {{ subject_name }} {{ year }}</span>
+    </div>
+    <div class="pq-bar">
+        <div id="bar"></div>
+    </div>
+
+    <div class="pq-quiz" id="quiz">
+        <div class="pq-left">
+            <p class="muted" id="counter"></p>
+            <div class="pq-passage" id="passage"></div>
+            <div class="pq-q"><span id="qtext"></span><br><img id="qimg" alt="" style="display:none"></div>
+        </div>
+
+        <div class="pq-right">
+            <div class="pq-opts" id="options"></div>
+
+            <div class="pq-sol" id="solution">
+                <p class="pq-verdict" id="verdict"></p>
+                <div class="txt" id="answerLine"></div>
+                <div id="explainBox" style="display:none">
+                    <h2>Basic solution</h2>
+                    <div class="txt" id="solutionText"></div>
+                    <ol id="steps"></ol>
+                </div>
+            </div>
+
+            <div class="pq-actions">
+                <button type="button" class="pq-btn" id="stepBtn" disabled>Step-by-step solution</button>
+                <button type="button" class="pq-btn yellow" id="next">Next</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="pq-result" id="result">
+        <p class="muted">You scored</p>
+        <div class="big" id="score"></div>
+        <p class="muted" id="scoreMsg" style="margin-bottom:20px"></p>
+        <div class="pq-actions" style="width:100%;max-width:420px">
+            <a href="?" class="pq-btn">Choose subject</a>
+            <button type="button" class="pq-btn yellow" onclick="location.reload()">Practise again</button>
+        </div>
+    </div>
+
+    {{ questions|json_script:"questions-data" }}
+    <script>
+        (function () {
+            var questions = JSON.parse(document.getElementById('questions-data').textContent);
+            var $ = function (id) { return document.getElementById(id); };
+            var i = 0, score = 0, answered = false;
+
+            function render() {
+                var q = questions[i];
+                answered = false;
+                $('counter').textContent = 'Question ' + (i + 1) + ' of ' + questions.length;
+                $('bar').style.width = (i / questions.length * 100) + '%';
+
+                $('passage').style.display = q.passage ? 'block' : 'none';
+                $('passage').innerHTML = q.passage || '';
+                $('qtext').innerHTML = q.question;
+                $('qimg').style.display = q.image ? 'inline-block' : 'none';
+                if (q.image) $('qimg').src = q.image;
+
+                var box = $('options');
+                box.innerHTML = '';
+                Object.keys(q.options).forEach(function (key) {
+                    var b = document.createElement('button');
+                    b.type = 'button';
+                    b.className = 'pq-opt';
+                    b.dataset.key = key;
+                    b.innerHTML = q.options[key];
+                    b.addEventListener('click', function () { choose(key); });
+                    box.appendChild(b);
+                });
+
+                $('solution').style.display = 'none';
+                $('steps').style.display = 'none';
+                $('stepBtn').disabled = true;
+                $('next').textContent = i === questions.length - 1 ? 'Finish' : 'Next';
+            }
+
+            function choose(key) {
+                if (answered) return;
+                answered = true;
+                var q = questions[i];
+                var ok = key === q.answer;
+                if (ok) score++;
+
+                document.querySelectorAll('#options button').forEach(function (b) {
+                    b.disabled = true;
+                    if (b.dataset.key === q.answer) b.classList.add('correct');
+                    else if (b.dataset.key === key) b.classList.add('wrong');
+                    else b.classList.add('dim');
+                });
+
+                var v = $('verdict');
+                v.textContent = ok ? 'Correct' : 'Wrong';
+                v.className = 'pq-verdict ' + (ok ? 'ok' : 'no');
+                $('answerLine').innerHTML = 'Correct answer: ' + q.answer.toUpperCase() + '. ' + (q.options[q.answer] || '');
+
+                var hasExplanation = !!q.explanation;
+                $('explainBox').style.display = hasExplanation ? 'block' : 'none';
+                if (hasExplanation) $('solutionText').innerHTML = q.explanation;
+                $('stepBtn').disabled = !hasExplanation;
+                $('solution').style.display = 'block';
+            }
+
+            $('stepBtn').addEventListener('click', function () {
+                var lines = questions[i].explanation.split(/<br\s*\/?>|\n/i).map(function (s) { return s.trim(); }).filter(Boolean);
+                var ol = $('steps');
+                ol.innerHTML = '';
+                lines.forEach(function (l) { var li = document.createElement('li'); li.innerHTML = l; ol.appendChild(li); });
+                ol.style.display = ol.style.display === 'block' ? 'none' : 'block';
+            });
+
+            $('next').addEventListener('click', function () {
+                if (i < questions.length - 1) { i++; render(); return; }
+                $('quiz').style.display = 'none';
+                $('bar').style.width = '100%';
+                $('score').textContent = score + '/' + questions.length;
+                $('scoreMsg').textContent = score / questions.length >= 0.7 ? 'Strong run.' : 'Review the questions and try again.';
+                $('result').style.display = 'flex';
+            });
+
+            render();
+        })();
+    </script>
+    {% endif %}
+
+</div>
+
+{% endblock %}

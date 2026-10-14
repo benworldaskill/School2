@@ -166,4 +166,41 @@ class Gallery(models.Model):
 
 
 
+class ExamType(models.TextChoices):
+    JAMB = 'jamb', 'JAMB(UTME)'
+    WAEC = 'waec', 'WAEC(WASSCE)'
+    NECO = 'neco', 'NECO'
+    POST_UTME = 'post_utme', 'POST-UTME'
 
+    @property
+    def short_label(self):
+        """Compact name used on the exam buttons."""
+        return {
+            'jamb': 'UTME',
+            'waec': 'WAEC',
+            'neco': 'NECO',
+            'post_utme': 'Post-UTME',
+        }.get(self.value, self.label)
+
+
+class SubjectType(models.TextChoices):
+    ENGLISH = 'english-language', 'English Language'
+    MATHEMATICS = 'mathematics', 'Mathematics'
+    PHYSICS = 'physics', 'Physics'
+    CHEMISTRY = 'chemistry', 'Chemistry'
+    BIOLOGY = 'biology', 'Biology'
+    GOVERNMENT = 'government', 'Government'
+    ECONOMICS = 'economics', 'Economics'
+
+    @property
+    def glyph(self):
+        """Thin line glyph shown on the subject button."""
+        return {
+            'english-language': 'Aa',
+            'mathematics': 'ƒ(x)',
+            'physics': '⚛',
+            'chemistry': '⬡',
+            'biology': '✺',
+            'government': '⚖',
+            'economics': '↗',
+        }.get(self.value, '•')
