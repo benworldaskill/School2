@@ -121,7 +121,6 @@ def coming(request):
     return render(request, 'coming.html')
 
 
-
 ALOC_URL = "https://dev.aloc.com.ng/api/v1/questions"
 
 HTTP_MESSAGES = {
@@ -150,22 +149,32 @@ def _normalise(raw):
 
 
 def practice_question(request):
+  
     years = [str(y) for y in range(datetime.now().year, 1999, -1)]
 
-    exam = request.GET.get('exam') or ExamType.values[0]
+    
+    exam = request.GET.get('exam') or 'jamb'
     subject = request.GET.get('subject')
     year = request.GET.get('year') or years[0]
 
     questions = []
     error_message = None
 
+    
+    try:
+        valid_exams = [e.value for e in ExamType]
+        valid_subjects = [s.value for s in SubjectType]
+    except AttributeError:
+
+        valid_exams = []
+        valid_subjects = []
+
     if subject:
-        if exam in ExamType.values and subject in SubjectType.values and year in years:
+        if exam in valid_exams and subject in valid_subjects and year in years:
             try:
                 response = requests.get(
                     ALOC_URL,
-                    headers={
-                        'X-API-Key': settings.SECRET_KEY},
+                    headers={'X-API-Key': settings.SECRET_KEY},
                     params={'examType': exam, 'subject': subject,
                             'year': year, 'limit': 10},
                     timeout=10,
@@ -176,7 +185,7 @@ def practice_question(request):
                         data = [data]
                     questions = _normalise(data)
                 elif response.status_code == 404:
-                    pass  # no questions for this combination; the page says so
+                    pass
                 else:
                     error_message = HTTP_MESSAGES.get(
                         response.status_code,
@@ -191,21 +200,24 @@ def practice_question(request):
         else:
             error_message = 'Invalid exam, subject or year selection.'
 
+    
     context = {
         'mode': 'practice' if questions else 'select',
         'exams': [
-            {'slug': e.value, 'name': e.label, 'short': e.short_label}
+            {'slug': getattr(e, 'value', str(e)), 'name': getattr(
+                e, 'label', str(e)), 'short': getattr(e, 'short_label', str(e))}
             for e in ExamType
         ],
         'subjects': [
-            {'slug': s.value, 'name': s.label, 'glyph': s.glyph}
+            {'slug': getattr(s, 'value', str(s)), 'name': getattr(
+                s, 'label', str(s)), 'glyph': getattr(s, 'glyph', '')}
             for s in SubjectType
         ],
         'years': [{'value': y} for y in years],
         'selected_exam': exam,
         'questions': questions,
-        'subject_name': dict(SubjectType.choices).get(subject, ''),
-        'exam_short': ExamType(exam).short_label if exam in ExamType.values else '',
+        'subject_name': dict(getattr(SubjectType, 'choices', [])).get(subject, ''),
+        'exam_short': getattr(ExamType(exam), 'short_label', '') if exam in valid_exams else '',
         'year': year,
         'subject_requested': bool(subject),
         'error': error_message,
