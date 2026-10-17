@@ -168,7 +168,6 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 ALLOWED_HOSTS = ['*', '.railway.app', 'localhost', '127.0.0.1']  # Newly added
 CSRF_TRUSTED_ORIGINS = [
-    'https://web-production-97443f.up.railway.app',
-    'https://web-production-83aac.up.railway.app'
+    'https://school2-production.up.railway.app/',
 ]  # newly added
 WHITENOISE_KEEP_ONLY_HASHED_FILES = True  # newly added
