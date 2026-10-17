@@ -121,7 +121,7 @@ def coming(request):
     return render(request, 'coming.html')
 
 
-# def practice_question(request):
+#def practice_question(request):
     current_year = datetime.now().year
 
     exam = request.GET.get('exam')
@@ -296,7 +296,7 @@ def practice_question(request):
                 response = requests.get(
                     ALOC_URL,
                     headers={
-                        'X-API-Key': "aloc_OLe2vTzrwmQk0NrJ7EkfYYakOyfJHuth7fVhOzDK"},
+                        'X-API-Key': settings.SECRET_KEY},
                     params={'examType': exam, 'subject': subject,
                             'year': year, 'limit': 10},
                     timeout=10,
